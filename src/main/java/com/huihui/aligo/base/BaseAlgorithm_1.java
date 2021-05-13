@@ -1,7 +1,7 @@
 package com.huihui.aligo.base;
 
 /**
- * 打印int整数(32位)的二进制
+ * 打印int整数(32位)的二进制(补码)
  * 位运算符：&、<<
  * 思路：32位的整数，通过1左移31~0与num作&运算，从最高位依次向最低位取数；
  * @author minghui.y
@@ -11,7 +11,9 @@ public class BaseAlgorithm_1 {
 
     public static void main( String[] args ) {
 
-        print( -1 );
+        // -7 的补码：11111111111111111111111111111001
+
+        print( -7 );
     }
 
     public static void print(int num) {
