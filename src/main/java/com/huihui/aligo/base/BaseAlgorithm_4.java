@@ -1,5 +1,7 @@
 package com.huihui.aligo.base;
 
+import org.apache.commons.lang3.time.StopWatch;
+
 import java.util.Arrays;
 
 /**
@@ -11,8 +13,21 @@ import java.util.Arrays;
 public class BaseAlgorithm_4 {
 
     public static void main( String[] args ) {
-        int arr[] = {2,1,5,4,6,3,-1};
-        sortArr( arr);
+      /*  int arr[] = {2,1,5,4,6,3,-1};
+        sortArr( arr);*/
+
+        //性能测试   8万条数据：11249
+        int arrLength = 8 * 10000;
+        int arr[] = new int[arrLength];
+        for (int i = 0;i< arrLength;i++) {
+            arr[i] = (int) (Math.random() * 10000);
+        }
+
+        StopWatch stopWatch = new StopWatch();
+        stopWatch.start();
+        sortArr( arr );
+        stopWatch.stop();
+        System.out.println("选择排序总耗时：" + stopWatch.getTime());
 
     }
 
