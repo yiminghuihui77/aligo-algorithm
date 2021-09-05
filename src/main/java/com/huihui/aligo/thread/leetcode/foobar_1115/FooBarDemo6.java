@@ -1,4 +1,4 @@
-package com.huihui.aligo.thread.base;
+package com.huihui.aligo.thread.leetcode.foobar_1115;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,7 +32,7 @@ public class FooBarDemo6 {
 
         private boolean flag = false;
         /**
-         *
+         * 存储线程
          */
         private Map<String, Thread> threadMap = new ConcurrentHashMap<>();
 

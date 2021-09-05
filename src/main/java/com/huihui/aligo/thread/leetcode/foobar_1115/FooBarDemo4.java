@@ -1,16 +1,18 @@
-package com.huihui.aligo.thread.base;
+package com.huihui.aligo.thread.leetcode.foobar_1115;
 
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  * leetcode题：交替打印FooBar
- * 方案：两个Semaphore控制谁首次执行和顺序执行
+ * 方案：利用阻塞队列天然的阻塞性：put和take动作，都是阻塞的
  * @author minghui.y
- * @create 2021-09-04 3:51 下午
+ * @create 2021-09-04 3:27 下午
  **/
-public class FooBarDemo5 {
+public class FooBarDemo4 {
 
     public static void main( String[] args ) {
+
         FooBarDemo1.PrintTask task = new FooBarDemo1.PrintTask( 4 );
 
         new Thread(task::printFoo).start();
@@ -18,51 +20,53 @@ public class FooBarDemo5 {
 
     }
 
+
     public static class PrintTask{
 
+
         private int count;
+        /**
+         * 阻塞队列的put和take动作，都是阻塞的
+         */
+        private BlockingQueue<Integer> fooQueue = new LinkedBlockingDeque<>(1);
+        private BlockingQueue<Integer> barQueue = new LinkedBlockingDeque<>(1);
 
         public PrintTask(int count) {
             this.count = count;
         }
 
-        /**
-         * 信号量控制顺序执行
-         * fooSemaphore初识为1，保证printFoo首先执行
-         * barSemaphore初始为0，保证printBar首次不能被执行
-         */
-        private Semaphore fooSemaphore = new Semaphore( 1 );
-        private Semaphore barSemaphore = new Semaphore( 0 );
 
         public void printFoo() {
             for (int i = 0;i < count;i++) {
+
                 try {
-                    //首次就能执行
-                    fooSemaphore.acquire();
+                    //往fooQueue中插入，满了则阻塞
+                    fooQueue.put( 1 );
                     System.out.print("foo");
-                    //这行执行后，printBar才能执行
-                    barSemaphore.release();
+                    //这行执行之后，printBar才能执行！！！
+                   barQueue.put( 1 );
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }
+
 
         public void printBar() {
             for (int i = 0;i < count;i++) {
+
                 try {
-                    //首次获取不到
-                    barSemaphore.acquire();
+                    barQueue.take();
                     System.out.print("bar");
-                    //这行执行后，printFoo才能继续执行
-                    fooSemaphore.release();
+                    //这行执行之后，printFoo才能继续执行
+                    fooQueue.take();
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
         }
-
-
 
     }
 }

@@ -1,4 +1,4 @@
-package com.huihui.aligo.thread.base;
+package com.huihui.aligo.thread.leetcode.foobar_1115;
 
 /**
  * leetcode题：交替打印FooBar

@@ -1,8 +1,12 @@
-package com.huihui.aligo.thread.base;
+package com.huihui.aligo.thread.leetcode.foobar_1115;
 
 /**
  * leetcode题：交替打印FooBar
+ * 描述：线程A打印指定次数的foo，线程B打印指定次数的bar
  * 方案：synchronized + Object.wait()、Object.notify() + flag
+ *      synchronized同步锁：保证线程是交替执行
+ *      监视器方法：线程状态控制，通信
+ *      标志位flag:两线程对flag有不同的期待值，在期待值时执行自己的逻辑，否则等待（控制了谁先执行）
  *
  * 思路：1~3方案的基本思路实际上都差不多：
  *      加锁（无论什么锁）目的都是防止当前线程执行是，其他线程也在执行

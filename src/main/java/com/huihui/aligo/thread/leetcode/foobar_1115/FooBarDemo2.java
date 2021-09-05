@@ -1,4 +1,4 @@
-package com.huihui.aligo.thread.base;
+package com.huihui.aligo.thread.leetcode.foobar_1115;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
