@@ -40,11 +40,11 @@ public class BaseAlgorithm_3 {
      */
     public static void sortArr(int[] arr) {
 
-        for (int i = 0;i< arr.length;i++) {
+        for (int i = 0;i< arr.length-1;i++) {
             //每轮假设其实下标的元素值最小
             int curMinIndex = i;
-            for (int j = i;j< arr.length;j++) {
-                if (arr[i] > arr[j]) {
+            for (int j = i + 1;j< arr.length;j++) {
+                if (arr[curMinIndex] > arr[j]) {
                     curMinIndex = j;
                 }
             }
