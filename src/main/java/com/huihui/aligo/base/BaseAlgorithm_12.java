@@ -3,7 +3,7 @@ package com.huihui.aligo.base;
 import java.util.Arrays;
 
 /**
- * 有序数组中，数值等于num的最左下标(无则返回-1)
+ * 有序数组中，>= num的最左下标(无则返回-1)
  *
  * @author minghui.y
  * @create 2021-10-17 5:25 下午
@@ -12,18 +12,20 @@ public class BaseAlgorithm_12 {
 
     public static void main( String[] args ) {
 
-        int[] arr = randomArr( 8, 10 );
+//        int[] arr = randomArr( 8, 10 );
+        int[] arr = {1,2,2,4,7,9};
         insertSorted( arr );
         printArr( arr );
 
-        System.out.println("二分法查找的最小下标：" + mostLeftIndex( arr, 5 ));
+        System.out.println("我的二分法查找的最小下标：" + mostLeftIndex( arr, 5 ));
+        System.out.println("左的二分发查找最小下标：" + mostLeftNoLessNumIndex(arr, 5));
         System.out.println("线性查找的最小下标：" + mostLeftIndex( arr, 5 ));
 
     }
 
 
     /**
-     * 查找有序数组arr[]中，元素等于num的最小下标
+     * 查找有序数组arr[]中，元素 >= num的最小下标
      * 没有则返回-1
      * @param arr 有序数组
      * @param num
@@ -37,6 +39,27 @@ public class BaseAlgorithm_12 {
 
         int L = 0;
         int R = arr.length - 1;
+        while (L <= R) {
+            int mid = (L + R) / 2;
+            if (arr[mid] >= num) {
+                // 中值可能等于num ，可能大于num
+                ans = mid;
+                R = mid - 1;
+            } else {
+                L = mid + 1;
+            }
+        }
+        return ans;
+    }
+
+    // arr有序的，>=num 最左
+    public static int mostLeftNoLessNumIndex(int[] arr, int num) {
+        if (arr == null || arr.length == 0) {
+            return -1;
+        }
+        int L = 0;
+        int R = arr.length - 1;
+        int ans = -1;
         while (L <= R) {
             int mid = (L + R) / 2;
             if (arr[mid] >= num) {
