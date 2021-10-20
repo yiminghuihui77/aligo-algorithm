@@ -121,7 +121,8 @@ public class BaseAlgorithm_19 {
 
         while (cur != end) {
             next = cur.next;
-            next.next = pre;
+            //当前节点向左指
+            cur.next = pre;
             pre = cur;
             cur = next;
         }
