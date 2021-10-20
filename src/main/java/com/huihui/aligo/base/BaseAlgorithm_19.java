@@ -58,6 +58,8 @@ public class BaseAlgorithm_19 {
 
         //引入新的指针：表示上一组翻转后的末尾节点
         Node lastEnd = start;
+
+        //链表节点数是K的整数倍时，lastEnd.next=null
         while (lastEnd.next != null) {
             start = lastEnd.next;
             end = getGroupEnd4K( start, k );
@@ -65,10 +67,10 @@ public class BaseAlgorithm_19 {
                 //凑不齐的组不再翻转
                 return head;
             }
+            lastEnd.next = end;
             //继续翻转
             localReverse( start, end );
-            //上一组翻转后的末尾节点重新指向当前组翻转后的第一个节点？？
-            lastEnd.next = end;
+            //上一组翻转后的末尾节点重新指向当前组翻转后前末尾节点
             lastEnd = start;
         }
 
@@ -114,6 +116,7 @@ public class BaseAlgorithm_19 {
         }
 
         //end向后移动，可能为空
+        //引用传递：不改变外部引用的指向！！
         end = end.next;
         Node pre = null;
         Node cur = start;

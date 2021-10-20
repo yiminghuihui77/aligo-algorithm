@@ -31,6 +31,24 @@ public class ShopWarehouseBaseVo {
     private String managerName;
     private String managerPhone;
 
+    @Override
+    public String toString() {
+        return "ShopWarehouseBaseVo{" +
+                "provinceId=" + provinceId +
+                ", provinceName='" + provinceName + '\'' +
+                ", cityId=" + cityId +
+                ", cityName='" + cityName + '\'' +
+                ", areaId=" + areaId +
+                ", areaName='" + areaName + '\'' +
+                ", whAddress='" + whAddress + '\'' +
+                ", whTag=" + whTag +
+                ", whExt='" + whExt + '\'' +
+                ", shopId='" + shopId + '\'' +
+                ", whName='" + whName + '\'' +
+                ", managerName='" + managerName + '\'' +
+                ", managerPhone='" + managerPhone + '\'' +
+                '}';
+    }
 
     /**
      * Getter method for property provinceId.
