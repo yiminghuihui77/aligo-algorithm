@@ -5,7 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author minghui.y
@@ -764,7 +766,7 @@ public class BatchAddShopWarehouseTest {
             shopWarehouseBaseVos.add( baseVo );
         }
 
-        System.out.println( JSONObject.toJSONString( vo ));
+//        System.out.println( JSONObject.toJSONString( vo ));
     }
 
     private static void getAddressId( ShopWarehouseBaseVo baseVo, String provinceName, String cityName, String areaName) {
@@ -773,6 +775,8 @@ public class BatchAddShopWarehouseTest {
 
         JSONObject jsonObject = JSONObject.parseObject( addressJson );
         JSONArray provinceArray = jsonObject.getJSONArray( "data" );
+
+        Map<String, ShopWarehouseBaseVo> errorMap = new HashMap<>();
         for (int i = 0;i< provinceArray.size();i++) {
             //省
             JSONObject provinceObject = provinceArray.getJSONObject( i );
@@ -820,8 +824,16 @@ public class BatchAddShopWarehouseTest {
         }
         //校验
         if (baseVo.getProvinceId() == null ||  baseVo.getCityId() == null ||  baseVo.getAreaId() == null) {
-            System.out.println(baseVo);
-            throw new RuntimeException("地址无法匹配");
+//            System.out.println("行政区匹配异常：" + baseVo);
+            String key = baseVo.getProvinceName() + "-" + baseVo.getCityName() + "-" + baseVo.getAreaName();
+            errorMap.put( key, baseVo );
+
+//            throw new RuntimeException("地址无法匹配");
+        }
+
+        if (!errorMap.isEmpty()) {
+
+            System.out.println(JSONObject.toJSONString( errorMap.keySet() ));
         }
 
     }
