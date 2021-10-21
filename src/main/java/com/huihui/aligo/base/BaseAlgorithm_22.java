@@ -9,7 +9,7 @@ package com.huihui.aligo.base;
  * @author minghui.y
  * @create 2021-10-21 4:52 下午
  **/
-public class BaseAlgorithm_25 {
+public class BaseAlgorithm_22 {
 
     public static void main( String[] args ) {
        /* System.out.println(170 / 64);
@@ -21,6 +21,7 @@ public class BaseAlgorithm_25 {
         System.out.println(170 % 66);
         System.out.println(170 & 65);*/
 
+        System.out.println(170 % 64);
         BitMap bitMap = new BitMap( 200 );
         bitMap.add( 170 );
 //        bitMap.add( 2 );
@@ -53,7 +54,7 @@ public class BaseAlgorithm_25 {
         public void add(int num) {
             //1、判断当前数落到哪个下标 num / 64 = num >> 6
             //2、指定下标的long的哪一位表示当前数值  num % 64 = num & 63
-
+            //注意不是1左移而是1L左移，否则32位的int类型的1左移超出范围会出问题
             bits[num >> 6] |= (1L << (num & 63));
             print( bits[num >> 6] );
         }
@@ -79,7 +80,8 @@ public class BaseAlgorithm_25 {
         int count = 0;
         for (int i = 63;i >=0; i--) {
             //必须跟0比较
-            System.out.print((num & (1 << i)) == 0 ? "0" : "1");
+            //注意1L而不是1
+            System.out.print((num & (1L << i)) == 0 ? "0" : "1");
             if (++count == 8) {
                 count = 0;
                 System.out.print(" ");
