@@ -1,4 +1,4 @@
-package com.huihui.aligo.base;
+package com.huihui.aligo.hello;
 
 import java.util.List;
 

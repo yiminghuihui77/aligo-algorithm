@@ -140,6 +140,12 @@ public class BaseAlgorithm_23 {
     }
 
 
+    /**
+     * a / b 完善的实现
+     * @param a
+     * @param b
+     * @return
+     */
     public static int divisionByBitPlus(int a, int b) {
         if (a == Integer.MIN_VALUE && b == Integer.MIN_VALUE) {
             return 1;
