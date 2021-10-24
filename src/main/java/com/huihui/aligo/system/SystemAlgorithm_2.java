@@ -40,7 +40,9 @@ public class SystemAlgorithm_2 {
             //普通方法计算的结果
 
             int ans1 = test( arr, k, m );
+            System.out.println("常规算法查找结果：" + ans1);
             int ans2 = getFindKFromM( arr, k, m );
+            System.out.println("特殊算法查找结果：" + ans2);
             if (ans1 != ans2) {
 //                System.out.println("测试结果不一致！ans1:" + ans1 + ", ans2:" + ans2);
                 throw new RuntimeException("\"测试结果不一致！ans1:\" + ans1 + \", ans2:\" + ans");
