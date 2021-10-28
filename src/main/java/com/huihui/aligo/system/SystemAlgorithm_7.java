@@ -3,7 +3,7 @@ package com.huihui.aligo.system;
 import java.util.Arrays;
 
 /**
- * 归并排序(递归思想)
+ * 1、归并排序(递归思想)
  * 满足T(N) = 2 * T(N/2) + O(N)， a = 2,b = 2,d = 1
  * 符合master公式，因此归并排序时间复杂度：O(N * logN)
  *
@@ -23,16 +23,20 @@ public class SystemAlgorithm_7 {
         for (int i = 0;i < tryTimes;i++) {
             int[] arr =randomArr( maxLength, maxValue );
             int[] copyArr = copyArr( arr );
+            int[] copyArr2 = copyArr( arr );
 
             System.out.println("排序前：");
             printArr( arr );
 
             //arr使用归并排序
             mergeSort( arr );
+            //归并排序（迭代写法）
+            mergeSort2( copyArr2 );
             //copyArr使用插入排序
             insertedSort(copyArr);
             //比较两种排序结果是否一致
             compareArr( arr, copyArr );
+            compareArr( copyArr2, copyArr );
 
             System.out.println("排序后：");
             printArr( arr );
@@ -99,7 +103,7 @@ public class SystemAlgorithm_7 {
     }
 
     /**
-     * 归并排序
+     * 归并排序（地推写法）
      * @param arr
      */
     public static void mergeSort(int[] arr) {
@@ -108,6 +112,38 @@ public class SystemAlgorithm_7 {
         }
         process( arr, 0, arr.length - 1 );
 
+    }
+
+
+    /**
+     * 归并排序（迭代写法）
+     * @param arr
+     */
+    public static void mergeSort2(int[] arr) {
+        if (arr == null || arr.length < 2) {
+            return;
+        }
+        int N = arr.length;
+        // 步长
+        int mergeSize = 1;
+        while (mergeSize < N) { // log N
+            // 当前左组的，第一个位置
+            int L = 0;
+            while (L < N) {
+                if (mergeSize >= N - L) {
+                    break;
+                }
+                int M = L + mergeSize - 1;
+                int R = M + Math.min(mergeSize, N - M - 1);
+                merge(arr, L, M, R);
+                L = R + 1;
+            }
+            // 防止溢出
+            if (mergeSize > N / 2) {
+                break;
+            }
+            mergeSize <<= 1;
+        }
     }
 
     /**
