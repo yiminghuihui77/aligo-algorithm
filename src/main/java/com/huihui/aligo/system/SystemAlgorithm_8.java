@@ -97,6 +97,14 @@ public class SystemAlgorithm_8 {
 
     }
 
+    /**
+     *
+     * @param arr
+     * @param l
+     * @param mid
+     * @param r
+     * @return
+     */
     public static int merge(int[] arr, int l, int mid, int r) {
         int[] copyArr = new int[r - l + 1];
         int index = 0;
@@ -105,6 +113,7 @@ public class SystemAlgorithm_8 {
         int smallSum = 0;
 
         while (pl <= mid && pr <= r) {
+            //右组等于左组是，先拷贝右组
             if (arr[pl] < arr[pr]) {
                 //左边小，累加小和
                 smallSum += arr[pl] * (r - pr + 1);

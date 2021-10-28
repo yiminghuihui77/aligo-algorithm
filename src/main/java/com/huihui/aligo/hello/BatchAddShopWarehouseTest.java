@@ -23,7 +23,7 @@ public class BatchAddShopWarehouseTest {
         List<ShopWarehouseBaseVo> shopWarehouseBaseVos = new ArrayList<>();
         vo.setShopWarehouseBaseVos( shopWarehouseBaseVos );
 
-        String rowString = "27336,哈啰电动车长河旗舰店,聂曼,18888961600,浙江省,杭州市,滨江区,浙江省杭州市滨江区长河街道新合作医药(滨兴东苑店)滨兴东苑齐飞路";
+        String rowString = "28541,测试门店仓,灰灰,17826833394,浙江省,杭州市,西湖区,益展大厦";
 
 
 
