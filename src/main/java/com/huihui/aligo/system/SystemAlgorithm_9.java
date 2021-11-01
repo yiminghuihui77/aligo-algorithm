@@ -3,8 +3,8 @@ package com.huihui.aligo.system;
 import java.util.Arrays;
 
 /**
- * 归并排序延伸问题2：
- * 无序数组arr[]，对于任一元素arr[i]，求满足arr[i] > arr[j] * 2,的元素个数（j > i）
+ * 归并排序延伸问题2：biggerThanTwice
+ * 无序数组arr[]，对于任一元素arr[i]，求其右边元素，满足arr[i] > arr[j] * 2,的元素个数（j > i），返回总个数
  * @author minghui.y
  * @create 2021-10-28 3:57 下午
  **/
@@ -74,6 +74,7 @@ public class SystemAlgorithm_9 {
 
         int ans = 0;
         for (int i = 0;i < arr.length ;i++) {
+            //由于数组无序没有单调特性，一次遇到右边第一个不满足条件的元素后，j也要继续右移寻找其他满足条件的元素
             for (int j = i + 1;j < arr.length;j++) {
                 if (arr[i] >  arr[j] << 1) {
                     ans++;
@@ -114,7 +115,7 @@ public class SystemAlgorithm_9 {
             while (windowR <= r && (arr[i] > arr[windowR] << 1)) {
                windowR++;
            }
-            //注意这个范围：[M+1, windowR)
+            //注意这个范围：[M+1, windowR) 内的元素都满足条件
            ans += (windowR - mid - 1);
         }
 

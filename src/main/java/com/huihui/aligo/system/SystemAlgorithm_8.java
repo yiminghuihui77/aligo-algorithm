@@ -3,7 +3,7 @@ package com.huihui.aligo.system;
 import java.util.Arrays;
 
 /**
- * 小和问题
+ * 小和问题：对任意元素arr[i]，累加其左边小于arr[i]的元素值，返回所有元素总的小和
  * 利用归并排序merge的过程，顺便求出小和
  * @author minghui.y
  * @create 2021-10-27 4:55 下午
@@ -112,10 +112,11 @@ public class SystemAlgorithm_8 {
         int pr = mid + 1;
         int smallSum = 0;
 
+        //pr从mid + 1位置一直往右移动，不会回退
         while (pl <= mid && pr <= r) {
             //右组等于左组是，先拷贝右组
             if (arr[pl] < arr[pr]) {
-                //左边小，累加小和
+                //左边小，累加小和  arr[pl]小于[pr,r]范围的所有数
                 smallSum += arr[pl] * (r - pr + 1);
                 copyArr[index++] = arr[pl++];
             } else {
