@@ -14,9 +14,9 @@ public class SystemAlgorithm_1 {
 
 //        testFindOddNum();
 
-//        testMostRightOne();
+        testMostRightOne();
 
-        testFindTwoOddNum();
+//        testFindTwoOddNum();
     }
 
 
