@@ -2,7 +2,14 @@ package com.huihui.aligo.system;
 
 /**
  * https://leetcode.com/problems/count-of-range-sum/
- * 归并排序衍生题目：对于数组arr[]，求有多少子数组的累加和，位于指定区间[lower, upper]范围内
+ * 归并排序衍生题目：区间和的个数
+ * 关于本题的一些转换：
+ *  1、使用累加和数组协助
+ *  2、arr[i]~arr[j]的累加和记为sum(i,j)，求sum(i,j)落在[lower, upper]范围内，等价于sum(0,j)-sum(0,i-1)落在[lower, upper]范围内
+ *  3、以右组的j为基准，定出范围上下限，求左组落在上下限范围的个数
+ *
+ *
+ * 对于数组arr[]，求有多少子数组的累加和，位于指定区间[lower, upper]范围内
  *
  * 加上数组arr在0~i范围累加和是X，求必须以i位置结尾的子数组中，有多少在[L, UP]范围上
  * 等价于：求i之前的所有前缀和中，有多少个前缀和在[X-UP, X-L]范围上
@@ -11,33 +18,37 @@ package com.huihui.aligo.system;
  **/
 public class SystemAlgorithm_10 {
 
+//    public static void main( String[] args ) {
+//
+//        int tryTimes = 10000;
+//        int maxLength = 50;
+//        int maxValue = 200;
+//        int lower= 10;
+//        int upper = 50;
+//
+//        for (int i = 0;i < tryTimes;i++) {
+//            System.out.println("----------------------------");
+//            int[] arr = randomArr( maxLength, maxValue );
+//            int[] copyArr = copyArr( arr );
+//            System.out.println("原始数组：");
+//            printArr( arr );
+//            //常规方式求
+//            int count1 = getCount4Range( arr, lower, upper );
+//            int count2 = mergeSort4RangeCount( copyArr, lower, upper );
+//            System.out.println("常规方式的count: " + count1);
+//            System.out.println("归并排序方式的count: " + count2);
+//            System.out.println("----------------------------");
+//            if (count1 != count2) {
+//                throw new RuntimeException("结果不一致");
+//            }
+//        }
+//
+//
+//
+//    }
+
     public static void main( String[] args ) {
-
-        int tryTimes = 10000;
-        int maxLength = 50;
-        int maxValue = 200;
-        int lower= 10;
-        int upper = 50;
-
-        for (int i = 0;i < tryTimes;i++) {
-            System.out.println("----------------------------");
-            int[] arr = randomArr( maxLength, maxValue );
-            int[] copyArr = copyArr( arr );
-            System.out.println("原始数组：");
-            printArr( arr );
-            //常规方式求
-            int count1 = getCount4Range( arr, lower, upper );
-            int count2 = mergeSort4RangeCount( copyArr, lower, upper );
-            System.out.println("常规方式的count: " + count1);
-            System.out.println("归并排序方式的count: " + count2);
-            System.out.println("----------------------------");
-            if (count1 != count2) {
-                throw new RuntimeException("结果不一致");
-            }
-        }
-
-
-
+        
     }
 
 

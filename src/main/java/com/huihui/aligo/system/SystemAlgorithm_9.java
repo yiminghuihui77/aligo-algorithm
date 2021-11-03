@@ -111,6 +111,7 @@ public class SystemAlgorithm_9 {
         // 目前囊括进来的数，是从[M+1, windowR)
         int windowR = mid + 1;
         //计算目标值
+        //求针对左组每个元素，在右组中符合条件的个数，因此for循环以左组数为基准，去找符合条件的右组的下标
         for (int i = l;i <= mid;i++) {
             while (windowR <= r && (arr[i] > arr[windowR] << 1)) {
                windowR++;
