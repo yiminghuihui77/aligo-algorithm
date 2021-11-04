@@ -18,37 +18,33 @@ package com.huihui.aligo.system;
  **/
 public class SystemAlgorithm_10 {
 
-//    public static void main( String[] args ) {
-//
-//        int tryTimes = 10000;
-//        int maxLength = 50;
-//        int maxValue = 200;
-//        int lower= 10;
-//        int upper = 50;
-//
-//        for (int i = 0;i < tryTimes;i++) {
-//            System.out.println("----------------------------");
-//            int[] arr = randomArr( maxLength, maxValue );
-//            int[] copyArr = copyArr( arr );
-//            System.out.println("原始数组：");
-//            printArr( arr );
-//            //常规方式求
-//            int count1 = getCount4Range( arr, lower, upper );
-//            int count2 = mergeSort4RangeCount( copyArr, lower, upper );
-//            System.out.println("常规方式的count: " + count1);
-//            System.out.println("归并排序方式的count: " + count2);
-//            System.out.println("----------------------------");
-//            if (count1 != count2) {
-//                throw new RuntimeException("结果不一致");
-//            }
-//        }
-//
-//
-//
-//    }
-
     public static void main( String[] args ) {
-        
+
+        int tryTimes = 10000;
+        int maxLength = 50;
+        int maxValue = 200;
+        int lower= 10;
+        int upper = 50;
+
+        for (int i = 0;i < tryTimes;i++) {
+            System.out.println("----------------------------");
+            int[] arr = randomArr( maxLength, maxValue );
+            int[] copyArr = copyArr( arr );
+            System.out.println("原始数组：");
+            printArr( arr );
+            //常规方式求
+            int count1 = getCount4Range( arr, lower, upper );
+            int count2 = mergeSort4RangeCount( copyArr, lower, upper );
+            System.out.println("常规方式的count: " + count1);
+            System.out.println("归并排序方式的count: " + count2);
+            System.out.println("----------------------------");
+            if (count1 != count2) {
+                throw new RuntimeException("结果不一致");
+            }
+        }
+
+
+
     }
 
 
@@ -85,31 +81,20 @@ public class SystemAlgorithm_10 {
      * @return
      */
     public static int mergeSort4RangeCount(int[] arr, int lower, int upper) {
-        if (arr == null) {
+        if (arr == null || arr.length == 0) {
             return 0;
         }
-        if (arr.length < 2) {
-            if (judgeBetween( arr[0], lower, upper )) {
-                return 1;
-            } else {
-                return 0;
-            }
-        }
 
-        //求数组的类加和数组
-        int[] sumArr = getSumArr( arr );
+        //求数组的类加和数组：累加和数组必须用long类型，否则存在边界问题
+        long[] sumArr = getSumArr( arr );
 
 
         return process( sumArr, lower, upper, 0, sumArr.length-1 );
     }
 
-    public static int process(int[] sumArr, int lower, int upper, int l, int r) {
+    public static int process(long[] sumArr, int lower, int upper, int l, int r) {
         if (l == r) {
-            if (judgeBetween( sumArr[l], lower, upper )) {
-                return 1;
-            } else {
-                return 0;
-            }
+            return judgeBetween( sumArr[l], lower, upper ) ? 1 : 0;
         }
 
         int mid = l + ((r - l) >> 2);
@@ -119,14 +104,14 @@ public class SystemAlgorithm_10 {
                 + merge( sumArr, lower, upper, l, mid, r );
     }
 
-    public static int merge(int[] sumArr, int lower, int upper, int l, int mid, int r) {
+    public static int merge(long[] sumArr, int lower, int upper, int l, int mid, int r) {
         int windowL = l;
         int windowR = l;
 
         int ans = 0;
         for (int i = mid + 1;i <= r;i++) {
-            int min = sumArr[i] - upper;
-            int max = sumArr[i] - lower;
+            long min = sumArr[i] - upper;
+            long max = sumArr[i] - lower;
 
             //由于单调性，windowL和windowR不会回退
             while (windowL <= mid && sumArr[windowL] < min) {
@@ -141,7 +126,7 @@ public class SystemAlgorithm_10 {
         }
 
         //合并数组
-        int[] help = new int[r - l + 1];
+        long[] help = new long[r - l + 1];
         int x = l;
         int y = mid + 1;
         int index = 0;
@@ -188,11 +173,11 @@ public class SystemAlgorithm_10 {
         }
 
         //求数组的类加和数组
-        int[] sumArr = getSumArr( arr );
+        long[] sumArr = getSumArr( arr );
         int ans = 0;
         for (int i = 0;i < arr.length;i++) {
             for (int j = i;j < arr.length;j++) {
-                int subSum = subSum( sumArr, i, j );
+                long subSum = subSum( sumArr, i, j );
                 if (judgeBetween( subSum, lower, upper )) {
                     ans++;
                 }
@@ -209,7 +194,7 @@ public class SystemAlgorithm_10 {
      * @param r
      * @return
      */
-    public static int subSum(int[] sumArr, int l, int r) {
+    public static long subSum(long[] sumArr, int l, int r) {
         //数组下标检测
         if (l < 0 || r > sumArr.length-1) {
             throw new RuntimeException("参数错误");
@@ -228,8 +213,8 @@ public class SystemAlgorithm_10 {
      * @param arr
      * @return
      */
-    public static int[] getSumArr(int[] arr) {
-        int[] sumArr = new int[arr.length];
+    public static long[] getSumArr(int[] arr) {
+        long[] sumArr = new long[arr.length];
 
         for (int i = 0;i < arr.length;i++) {
             if (i == 0) {
@@ -244,7 +229,7 @@ public class SystemAlgorithm_10 {
 
 
 
-    public static boolean judgeBetween(int target, int lower, int upper) {
+    public static boolean judgeBetween(long target, int lower, int upper) {
         if (target >= lower && target <= upper) {
             return true;
         }
