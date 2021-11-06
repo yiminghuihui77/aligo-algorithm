@@ -69,9 +69,11 @@ public class SystemAlgorithm_11 {
                 //交换index和less+1位置的元素
                 //less++
                 //index++
-                swap( arr, index, less + 1 );
+                /*swap( arr, index, less + 1 );
                 less++;
-                index++;
+                index++;*/
+
+                swap( arr, index++, ++less );
 
             }else if (arr[index] > arr[R]) {
                 index++;
