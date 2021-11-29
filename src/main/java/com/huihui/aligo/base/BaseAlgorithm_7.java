@@ -12,10 +12,10 @@ public class BaseAlgorithm_7 {
     public static void main( String[] args ) {
 
         //测Math.random()在[0,1)范围内等概率返回数值
-//        testRandom(0.6);
+        testRandom(0.6);
 
         //测Math.random() * K 将在[0,k)范围内等概率返回一个数值，向下取整后将在[0,k-1]范围内等概率返回一个整数
-//        testRandomPlus( 9 );
+        testRandomPlus( 9 );
 
         //
         xtoPower2(0.6);
