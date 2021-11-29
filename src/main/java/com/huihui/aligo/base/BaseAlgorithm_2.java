@@ -1,7 +1,7 @@
 package com.huihui.aligo.base;
 
 /**
- * 设计算法计算：1! + 2! + 3! + ... + N!
+ * 计算法计算：1! + 2! + 3! + ... + N!
  *
  * @author minghui.y
  * @create 2021-05-16 4:22 下午
